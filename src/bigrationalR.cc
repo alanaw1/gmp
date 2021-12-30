@@ -381,6 +381,8 @@ SEXP bigrational_div (SEXP a, SEXP b) {return bigrationalR::bigrational_binary_o
 SEXP bigrational_pow (SEXP a, SEXP b) {
     return bigrationalR::bigrational_bigz_binary_operation(a,b,operator^); //-> mpqz_pow() above
 }
+SEXP bigrational_conv (SEXP a, SEXP b) {return bigrationalR::bigrational_binary_operation(a,b,operatorCONV);}
+
 SEXP bigrational_as (SEXP n, SEXP d) {return bigrationalR::bigrational_binary_operation(n,d,set_denominator);} //-> mpq_div()
 
 SEXP bigrational_lt (SEXP a, SEXP b) {return bigrationalR::bigrational_logical_binary_operation(a,b,bigrationalR::lt);}

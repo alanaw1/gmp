@@ -20,6 +20,7 @@
 #include <Rinternals.h>
 
 #include <stdio.h>
+#include <vector.h>
 
 using std::string;
 
@@ -141,6 +142,28 @@ bigrational operator^(const bigrational& lhs, const biginteger& rhs)
     return bigrational();
 
   return bigrationalR::create_bigrational_z(lhs, rhs, bigrationalR::mpqz_pow);
+}
+
+/**
+ * \brief Return  conv( a, b )
+ */
+bigrational operatorCONV(const bigrational& lhs, const bigrational& rhs)
+{
+  /* get sizes of each vector */
+  int n_xa = lhs.size();
+  int n_xb = rhs.size();
+
+  /* initialize big rational of size */
+  bigrational xab(n_xa + n_xb - 1);
+  
+  /* fill in the entries */
+  Rcpp::Range r(0, n_xb-1);
+  for (int i=0; i<n_xa; i++, r++) {
+    xab[r] = bigrationalR::create_bigrational(xab[r], bigrationalR::create_bigrational(lhs[i], rhs, mpq_mul), mpq_add);
+  }
+
+  /* return */
+  return xab;
 }
 
 //
