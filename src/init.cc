@@ -82,6 +82,7 @@ static R_CallMethodDef CallEntries[] = {
   CALLDEF(bigrational_mul, 2),
   CALLDEF(bigrational_div, 2),
   CALLDEF(bigrational_pow, 2),
+  CALLDEF(bigrational_conv, 2),
   CALLDEF(bigrational_num, 1),
   CALLDEF(bigrational_den, 1),
   CALLDEF(bigrational_get_at, 2),

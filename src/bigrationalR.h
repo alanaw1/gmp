@@ -46,6 +46,11 @@ extern "C"
   SEXP bigrational_pow(SEXP a, SEXP b);
 
   /**
+   * \brief Conv (a, b)
+   */
+  SEXP bigrational_conv(SEXP a, SEXP b);
+
+  /**
    * \brief Return Numerator of a
    */
   SEXP bigrational_num(SEXP a);

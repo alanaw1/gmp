@@ -347,12 +347,6 @@ bigrational operator/(const bigrational& rhs, const bigrational& lhs);
  */
 bigrational operator^(const bigrational& rhs, const biginteger& lhs);
 
-/** 
- *\brief Convolve two bigrational vectors
- */
-bigrational operatorCONV(const bigrational& rhs, const bigrational& lhs);
-
-
 /** \brief comparison operator
  */
 bool operator> (const bigrational& rhs, const bigrational& lhs);

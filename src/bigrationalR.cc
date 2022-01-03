@@ -381,7 +381,45 @@ SEXP bigrational_div (SEXP a, SEXP b) {return bigrationalR::bigrational_binary_o
 SEXP bigrational_pow (SEXP a, SEXP b) {
     return bigrationalR::bigrational_bigz_binary_operation(a,b,operator^); //-> mpqz_pow() above
 }
-SEXP bigrational_conv (SEXP a, SEXP b) {return bigrationalR::bigrational_binary_operation(a,b,operatorCONV);}
+SEXP bigrational_conv(SEXP a, SEXP b) {
+  // L <- length(v)
+  //x <- c_bigq(lapply(1:L, function(i) sum(as.vector.bigq(v)[1:i] * rev(as.vector.bigq(w)[1:i]))))
+  bigvec_q va = bigrationalR::create_bignum(a);
+  bigvec_q vb = bigrationalR::create_bignum(b), result;
+
+  int L = va.size();
+  result.value.reserve(L);
+  //int i = INT_MIN;
+
+  for (int i = 0; i < L; ++i) {
+    // select 1:i
+    bigvec_q va_i = bigrationalR::create_bignum(a);
+    bigvec_q vb_i = bigrationalR::create_bignum(b);
+    vb_i.value.resize(i+1);
+    va_i.value.resize(i+1);
+
+    // reverse
+    std::reverse(vb_i.value.begin(), vb_i.value.end());
+
+    // take inner product
+    bigvec_q tmp_result;
+    bigrational inn_prod_sum = bigrational(0);
+    for (int j = 0; j < i+1; ++j) {
+      //bigvec_q tmp_a = va_i[j%va_i.size()];
+      //tmp_a.nrow = 1;
+      //bigvec_q tmp_b = vb_i[j%vb_i.size()];
+      //tmp_b.nrow = 1;
+      tmp_result.push_back(operator*(va_i[j%va_i.size()],vb_i[j%vb_i.size()]));
+      inn_prod_sum = operator+(inn_prod_sum, tmp_result[j]);
+      //tmp_result.push_back(bigrationalR::bigrational_binary_operation(bigrationalR::create_SEXP(tmp_a),bigrationalR::create_SEXP(tmp_b),operator*));
+      //inn_prod_sum = bigrationalR::bigrational_binary_operation(bigrationalR::create_SEXP(inn_prod_sum),bigrationalR::create_SEXP(tmp_result[j]),operator+);
+    }
+
+    result.push_back(inn_prod_sum);
+  }
+
+  return bigrationalR::create_SEXP(result);
+}
 
 SEXP bigrational_as (SEXP n, SEXP d) {return bigrationalR::bigrational_binary_operation(n,d,set_denominator);} //-> mpq_div()
 

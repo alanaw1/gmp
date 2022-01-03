@@ -68,6 +68,8 @@ pow.big <- function(e1, e2) {
         .Call(bigrational_pow, e1, as.bigz(e2))
 }
 
+conv.bigq <- function(e1, e2) .Call(bigrational_conv, e1, e2)
+
 print.bigq <- function(x, quote = FALSE, initLine = TRUE, ...)
 {
   if((n <- length(x)) > 0) {

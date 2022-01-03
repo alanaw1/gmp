@@ -64,7 +64,7 @@ export(
        "sub.bigq", "sub.bigz",
        "sum.bigq", "sum.bigz",
        ## "t.bigq", "t.bigz",
-       "urand.bigz")
+       "urand.bigz", "conv.bigq")
 
 ## For Rmpfr (and possibly similar packages)
 export(.as.bigz, ..as.bigz, .as.char.bigz)
