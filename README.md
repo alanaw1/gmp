@@ -15,4 +15,5 @@ Good news - got a version of `conv.bigq` working. I accomplish this via the foll
     - `R/bigq.R`: stub to call all back-end / underlying C++ functions. Define `conv.bigq` here.
     - `src/init.cc`: ensures registration of `conv.bigq`.
     - `NAMESPACE`: DynLib stuff that also ensures registration of `conv.bigq`.
+
 Hurray! Now the bad news. The function `conv.bigq` turns out to be very slow! I am surprised, given that I expected static compiling in C++ to manifest in huge speed gains when compared against R's dynamic compiling. 
