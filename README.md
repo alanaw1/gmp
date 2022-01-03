@@ -3,6 +3,16 @@
 
 This local version will contain methods for convolving vectors of big rationals.
 
+**Test Package**
+
+*Note: This requires R to be installed on your local PC.*
+1. Git clone / copy this repo into your local PC.
+2. On the terminal, navigate to directory containing the `gmp` repo. 
+3. Type `R CMD build gmp`; this builds the package. You should see `gmp_0.6-2.1.tar.gz` located in the current working directory.
+4. *(Test installation on local PC)* Type `R CMD INSTALL gmp_0.6-2.1.tar.gz`; this installs the package. 
+5. *(Test usage in R)* Type `R`. Type `install.packages("gmp_0.6-2.1.tar.gz")`. Type `library(gmp)`.
+
+
 **(12/30/21)** 
 Add `operatorCONV` in `bigrational.cc`. Package no longer compiles. Error seems to be with `bigrational`s not having "size" attributes or indexing. Now I'm not sure how `add.bigq` in **R** works for two vectors (e.g., `add.bigq(as.bigq(c(1,2,3)),as.bigq(c(4,5)))`). According to source code `add.bigq` calls `bigrational_add`, which is a two-variable function with `bigrational` arguments. Given that `add.bigq` works perfectly fine when its arguments are vectors, why doesn't `operatorCONV` work?   
 
